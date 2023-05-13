@@ -1,68 +1,86 @@
 <?php
+
 class Stack
 {
     private int $stackSize;
     private array $stack;
     private int $topIndex;
 
-    function __construct(int $stackSize)
+    public function __construct(int $stackSize)
     {
         $this->stackSize = $stackSize;
         $this->stack = array();
         $this->topIndex = -1;
     }
 
-    // return true if stack is empty
-    function isEmpty(): bool
+    /**
+     * @desc Check if stack is empty
+     *
+     * @return bool true if stack is empty
+     */
+    public function isEmpty(): bool
     {
-        return($this->topIndex == -1);
+        return ($this->topIndex == -1);
     }
 
-    // return true is stack is full
-    function isFull(): bool
+    /**
+     * @desc Check if stack is full
+     *
+     * @return bool true if stack is full
+     */
+    public function isFull(): bool
     {
-        return($this->topIndex == $this->stackSize - 1);
+        return ($this->topIndex == $this->stackSize - 1);
     }
 
-    // return amount of elements in a stack
-    function getSize(): int
+    /**
+     * @desc Get size of the stack
+     *
+     * @return int size of the stack
+     */
+    private function getSize(): int
     {
-        return($this->topIndex + 1);
+        return ($this->topIndex + 1);
     }
 
-    // remove element from top of the stack
-    function pop(): int
+    /**
+     * @desc Remove element from the top of the stack
+     *
+     * @return int Value of removed element
+     */
+    public function pop(): int
     {
         $topElement = $this->stack[$this->topIndex];
         $this->topIndex--;
         return $topElement;
     }
 
-    // add element to the stack
-    function push(int $newElement): void
+    /**
+     * @desc Add new element to the stack
+     *
+     * @param int $newElement value of a new element
+     */
+    public function push(int $newElement): void
     {
-        if(!$this->isFull())
-        {
+        if (!$this->isFull()) {
             $this->topIndex++;
             $this->stack[$this->topIndex] = $newElement;
         }
     }
 
-    // print the stack
-    function printStack(): void
+    /**
+     * @desc Print out all elements of the stack
+     */
+    public function printStack(): void
     {
-        if($this->isEmpty())
-        {
+        if ($this->isEmpty()) {
             echo "Stos jest pusty.\n";
-        }
-        else
-        {
-            echo "Stos (".$this->getSize()."-elementów): ";
-            for($i = 0; $i <= $this->topIndex; $i++)
-            {
-                echo $this->stack[$i]." ";
+        } else {
+            echo "Stos (" . $this->getSize() . "-elementów): ";
+            for ($i = 0; $i <= $this->topIndex; $i++) {
+                echo $this->stack[$i] . " ";
             }
-            echo "\n";
+            echo PHP_EOL;
         }
     }
 }
